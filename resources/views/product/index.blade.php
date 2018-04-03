@@ -13,18 +13,13 @@
                             <div>{{ $product->name }}</div>
                         </a>
                     @endforeach
+
+                    @if($products->count() == 0)
+                        There are no products found. Maybe create one?
+                    @endif
                     </div>
                 </div>
             </div>
-
-        @if (is_null($products))
-            <div class="card">
-                <div class="card-header">Products</div>
-                <div class="card-body">
-                    There are no products found. Maybe create one?
-                </div>
-            </div>
-        @endif
         </div>
     </div>
 </div>
