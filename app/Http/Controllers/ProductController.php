@@ -13,4 +13,11 @@ class ProductController extends Controller
 
         return view('product.index', ['products' => $products]);
     }
+
+    public function view($id, $slug = null)
+    {
+        $product = DB::table('products')->where('id', $id)->first();
+
+        return view('product.view', ['product' => $product]);
+    }
 }

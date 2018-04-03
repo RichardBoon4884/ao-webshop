@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Routes for products
 Route::get('/product', 'ProductController@index')->name('home');
+Route::get('/product/{id}/{slug?}', 'ProductController@view')->name('productView');
