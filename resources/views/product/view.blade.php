@@ -7,7 +7,12 @@
             <div class="card">
                 <div class="card-header">Product: {{ $product->name }}</div>
                 <div class="card-body">
-
+                    <div>
+                        Categories:
+                        @foreach ($product->categories as $category)
+                            {{ $category->title }},
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <a href="{{ url()->previous() }}">Return</a>

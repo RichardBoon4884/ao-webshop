@@ -11,6 +11,12 @@
                     @foreach ($products as $product)
                         <a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->name)]) }}" class="list-group-item">
                             <div>{{ $product->name }}</div>
+                            <div>
+                                Categories:
+                                @foreach ($product->categories as $category)
+                                    {{ $category->title }},
+                                @endforeach
+                            </div>
                         </a>
                     @endforeach
 
