@@ -9,7 +9,14 @@ class ShoppingCartController extends Controller
 {
     public function index(Request $request)
     {
-        return view('shoppingCart.index');
+        // Check if there is a shopping cart in the session
+        if ($request->session()->has('shoppingCartItems')) {
+            $shoppingCart = $request->session()->get('shoppingCartItems');
+        } else { // There is no shopping cart in the session
+            $shoppingCart = [];
+        }
+
+        return view('shopping_cart.index', ['shoppingCart' => $shoppingCart]);
     }
 
     /*
@@ -29,13 +36,17 @@ class ShoppingCartController extends Controller
         }
 
         // Check if product is in the shopping cart
-        if ($key = $this->searchShoppingCart($shoppingCart, $productId)) {
-            !isset($amount) ? $shoppingCart[$key]->amount = $amount : $shoppingCart[$key]->amount++;
+        if (($key = $this->searchShoppingCart($shoppingCart, $productId)) !== null) {var_dump($key);
+            // Check if there is a amount, otherwise increase amount
+            isset($amount) ? $shoppingCart[$key]->amount = $amount : $shoppingCart[$key]->amount++;
         } else { // Product is not in shopping cart, add it
             $product = Product::find($productId);
-            !isset($amount) ? $product->amount = $amount : $product->amount++;
+            // Check if there is a amount, otherwise set to 1
+            isset($amount) ? $product->amount = $amount : $product->amount = 1;
 
-            $key = array_push($shoppingCart, $product);
+            array_push($shoppingCart, $product);
+            end($shoppingCart);
+            $key = key($shoppingCart);
         }
 
         // Check if product amount is 0, then unset it

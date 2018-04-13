@@ -16,6 +16,7 @@
                 </div>
             </div>
             <a href="{{ url()->previous() }}">Return</a>
+            <a href="{{ route('shoppingCartUpdate', ['id' => $product->id]) }}">Add to shopping cart</a>
         </div>
     </div>
 </div>

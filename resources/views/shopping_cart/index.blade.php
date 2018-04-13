@@ -8,18 +8,18 @@
                     <div class="card-header">Products</div>
                     <div class="card-body">
                         <div class="list-group">
-                            @foreach ($products as $product)
+                            @foreach ($shoppingCart as $product)
                                 <a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->name)]) }}" class="list-group-item">
                                     <div>{{ $product->name }}</div>
                                     <div>
-
+                                        Amount: {{ $product->amount }}
                                     </div>
                                 </a>
                             @endforeach
 
-                            @if($products->count() == 0)
-                                There are no products in your shopping cart.
-                            @endif
+                            {{--@if($shoppingCart->count() == 0)--}}
+                                {{--There are no products in your shopping cart.--}}
+                            {{--@endif--}}
                         </div>
                     </div>
                 </div>
