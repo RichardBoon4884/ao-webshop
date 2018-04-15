@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Products</div>
+                    <div class="card-header">Shopping cart</div>
                     <div class="card-body">
                         <div class="list-group">
                             @foreach ($shoppingCart as $product)
@@ -17,9 +17,9 @@
                                         {{ Form::open(['method' => 'put', 'route' => ['shoppingCartUpdate', $product->id], 'class' => 'form-inline']) }}
                                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                             <div class="input-group-prepend">
-                                                {{ Form::label('amount-' . $product->id, 'Amount', ['class' => 'input-group-text']) }}
+                                                {{ Form::label('amount', 'Amount', ['class' => 'input-group-text']) }}
                                             </div>
-                                            {{ Form::number('amount-' . $product->id, $product->amount, ['class' => 'form-control'] ) }}
+                                            {{ Form::number('amount', $product->amount, ['class' => 'form-control'] ) }}
                                         </div>
                                         {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
                                         {{ Form::close() }}

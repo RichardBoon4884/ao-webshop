@@ -10,8 +10,8 @@ class Categories extends Model
 
     protected $fillable = array('title');
 
-    public function categories()
+    public function products()
     {
-        return $this->belongsToMany('App\Models\Products', 'categories_products', 'categories_id', 'products_id');
+        return $this->belongsToMany('App\Models\Product', 'categories_products', 'categories_id', 'products_id');
     }
 }

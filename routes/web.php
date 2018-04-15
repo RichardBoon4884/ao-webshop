@@ -35,3 +35,7 @@ Route::put('/shoppingcart/update/{productId}', function (int $productId)
 //Routes for products
 Route::get('/product', 'ProductController@index')->name('productIndex');
 Route::get('/product/{id}/{slug?}', 'ProductController@view')->name('productView');
+
+//Routes for categories
+Route::get('/categories', 'CategoryController@index')->name('categoryIndex');
+Route::get('/categories/{id}/{slug?}', 'CategoryController@view')->name('categoryView');
