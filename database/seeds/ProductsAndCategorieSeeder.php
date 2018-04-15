@@ -23,6 +23,18 @@ class ProductsAndCategorieSeeder extends Seeder
             [
                 'name' => 'Herpa Wings: Boeing 777-300ER KLM "Orange Pride" (1:500)',
                 'barCode' => '529754',
+            ],
+            [
+                'name' => 'Boek 1 – Farewell MD-11',
+                'barCode' => 'MD11BOEK',
+            ],
+            [
+                'name' => 'Boek 2 – MD-11 “End of Flightplan”',
+                'barCode' => 'MD11-EOFP',
+            ],
+            [
+                'name' => 'Ticket to Malta',
+                'barCode' => 'MLA',
             ]
         ]);
         DB::table('categories')->insert([
@@ -31,6 +43,15 @@ class ProductsAndCategorieSeeder extends Seeder
             ],
             [
                 'title' => 'Aviation'
+            ],
+            [
+                'title' => 'Books'
+            ],
+            [
+                'title' => 'Transport'
+            ],
+            [
+                'title' => 'Travel'
             ]
         ]);
         DB::table('categories_products')->insert([
@@ -57,6 +78,34 @@ class ProductsAndCategorieSeeder extends Seeder
             [
                 'categories_id' => 2,
                 'products_id' => 3,
+            ],
+            [
+                'categories_id' => 2,
+                'products_id' => 4,
+            ],
+            [
+                'categories_id' => 3,
+                'products_id' => 4,
+            ],
+            [
+                'categories_id' => 4,
+                'products_id' => 4,
+            ],
+            [
+                'categories_id' => 2,
+                'products_id' => 5,
+            ],
+            [
+                'categories_id' => 3,
+                'products_id' => 5,
+            ],
+            [
+                'categories_id' => 4,
+                'products_id' => 5,
+            ],
+            [
+                'categories_id' => 5,
+                'products_id' => 6,
             ]
         ]);
     }
