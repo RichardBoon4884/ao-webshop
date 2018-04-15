@@ -28,20 +28,20 @@ class ShoppingCartController extends Controller
      */
     public function update(Request $request, int $productId, int $amount = null)
     {
-        // Check if there is a shopping cart in the session
+        // Check if there is a shopping cart array in the session
         if ($request->session()->has('shoppingCartItems')) {
             $shoppingCart = $request->session()->get('shoppingCartItems');
-        } else { // There is no shopping cart in the session
+        } else { // There is no shopping cart array in the session
             $shoppingCart = [];
         }
 
         // Check if product is in the shopping cart
-        if (($key = $this->searchShoppingCart($shoppingCart, $productId)) !== null) {var_dump($key);
-            // Check if there is a amount, otherwise increase amount
+        if (($key = $this->searchShoppingCart($shoppingCart, $productId)) !== null) {
+            // Check if there is a amount given and set it, otherwise increase amount by one
             isset($amount) ? $shoppingCart[$key]->amount = $amount : $shoppingCart[$key]->amount++;
         } else { // Product is not in shopping cart, add it
             $product = Product::find($productId);
-            // Check if there is a amount, otherwise set to 1
+            // Check if there is a amount given and set it, otherwise set to 1
             isset($amount) ? $product->amount = $amount : $product->amount = 1;
 
             array_push($shoppingCart, $product);
