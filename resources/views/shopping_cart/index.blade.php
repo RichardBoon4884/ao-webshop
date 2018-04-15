@@ -9,12 +9,23 @@
                     <div class="card-body">
                         <div class="list-group">
                             @foreach ($shoppingCart as $product)
-                                <a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->name)]) }}" class="list-group-item">
-                                    <div>{{ $product->name }}</div>
-                                    <div>
-                                        Amount: {{ $product->amount }}
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1"><a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->name)]) }}">{{ $product->name }}</a></h5>
                                     </div>
-                                </a>
+                                    <div>
+                                        {{ Form::open(['method' => 'put', 'route' => ['shoppingCartUpdate', $product->id], 'class' => 'form-inline']) }}
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <div class="input-group-prepend">
+                                                {{ Form::label('amount-' . $product->id, 'Amount', ['class' => 'input-group-text']) }}
+                                            </div>
+                                            {{ Form::number('amount-' . $product->id, $product->amount, ['class' => 'form-control'] ) }}
+                                        </div>
+                                        {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
+                                        {{ Form::close() }}
+                                    </div>
+                                    <div><a href="{{ route('shoppingCartUpdate', ['productId' => $product->id, 'amount' => 0]) }}">Remove from shopping cart</a></div>
+                                </div>
                             @endforeach
 
                             {{--@if($shoppingCart->count() == 0)--}}

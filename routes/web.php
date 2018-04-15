@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Routes for shopping cart
 Route::get('/shoppingcart', 'ShoppingCartController@index')->name('shoppingCartIndex');
 Route::get('/shoppingcart/update/{productId}/{amount?}', 'ShoppingCartController@update')->name('shoppingCartUpdate');
+
+// Turn the put request into a get with parameters
+Route::put('/shoppingcart/update/{productId}', function (int $productId)
+{
+    $amount = Input::get('amount');
+    return redirect()->route('shoppingCartUpdate', ['productId' => $productId, 'amount' => $amount]);
+})->name('shoppingCartUpdatePut');
 
 //Routes for products
 Route::get('/product', 'ProductController@index')->name('productIndex');
