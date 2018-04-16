@@ -58,6 +58,7 @@ class ShoppingCartController extends Controller
             unset($shoppingCart->products[$key]);
         }
 
+        // Som the total
         foreach ($shoppingCart->products as $product) {
             $shoppingCart->total = $shoppingCart->total + $product->price * $product->amount;
         }
