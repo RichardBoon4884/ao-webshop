@@ -6,7 +6,7 @@ class Clients extends Model
 {
     protected $table = 'clients';
 
-    protected $fillable = array('firstName', 'lastName', 'gender', 'street', 'houseNumber', 'town', 'country');
+    protected $fillable = array('firstName', 'lastName', 'gender', 'street', 'houseNumber', 'zipCode', 'town', 'country');
 
     public function user()
     {

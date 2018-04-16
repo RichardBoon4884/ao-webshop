@@ -20,6 +20,15 @@
                         </div>
                         <div class="list-group" style="margin-top: 10px">
                             <div class="list-group-item">
+                                <h6>Dellivery information:</h6>
+                                <div>{{ $client->firstName }} {{ $client->lastName }}</div>
+                                <div>{{ $client->street }} {{ $client->houseNumber }}</div>
+                                <div>{{ $client->zipCode }} {{ $client->town }}</div>
+                                <div>{{ $client->country }}</div>
+                            </div>
+                        </div>
+                        <div class="list-group" style="margin-top: 10px">
+                            <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <a href="#" class="btn btn-primary" role="button">Confirm order</a>
                                     <div class="text-right">Total: {{ number_format($shoppingCart->total, 2, ',', ' ') }} EUR</div>

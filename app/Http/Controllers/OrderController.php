@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Clients;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,8 +27,14 @@ class OrderController extends Controller
             return redirect()->route('shoppingCartIndex');
         }
 
-        
+        $user = Auth::user();
+        $client = Clients::where('user_id', $user->id)->first();
 
-        return view('order.index', ['shoppingCart' => $shoppingCart]);
+        if (is_null($client)) {
+            // No client set for this user
+            return redirect()->route('shoppingCartIndex');
+        }
+
+        return view('order.index', ['shoppingCart' => $shoppingCart, 'client' => $client]);
     }
 }
