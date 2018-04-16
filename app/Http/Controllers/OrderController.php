@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ShoppingCart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Clients;
@@ -17,16 +18,7 @@ class OrderController extends Controller
 
     public function confirmOrder(Request $request)
     {
-        // Check if there is a shopping cart in the session
-        if ($request->session()->has('shoppingCart')) {
-            $shoppingCart = $request->session()->get('shoppingCart');
-        } else { // There is no shopping cart in the session
-            return redirect()->route('shoppingCartIndex');
-        }
-
-        if (count($shoppingCart->products) == 0) {
-            return redirect()->route('shoppingCartIndex');
-        }
+        $shoppingCart = new ShoppingCart($request);
 
         $user = Auth::user();
         $client = Clients::where('user_id', $user->id)->first();
@@ -41,16 +33,7 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
-        // Check if there is a shopping cart in the session
-        if ($request->session()->has('shoppingCart')) {
-            $shoppingCart = $request->session()->get('shoppingCart');
-        } else { // There is no shopping cart in the session
-            return redirect()->route('shoppingCartIndex');
-        }
-
-        if (count($shoppingCart->products) == 0) {
-            return redirect()->route('shoppingCartIndex');
-        }
+        $shoppingCart = new ShoppingCart($request);
 
         $order = new Orders;
 
@@ -61,7 +44,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        foreach ($shoppingCart->products as $product) {
+        foreach ($shoppingCart->getProducts() as $product) {
             $order->products()->attach($product->id, ['amount' => $product->amount]);
         }
 

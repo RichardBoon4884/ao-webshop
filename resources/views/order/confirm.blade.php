@@ -8,7 +8,7 @@
                     <div class="card-header">Order</div>
                     <div class="card-body">
                         <div class="list-group">
-                            @foreach ($shoppingCart->products as $product)
+                            @foreach ($shoppingCart->getProducts() as $product)
                                 <div class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1"><a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->title)]) }}">{{ $product->title }}</a></h5>
@@ -31,7 +31,7 @@
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <a href="{{ route('placeConfirm') }}" class="btn btn-primary" role="button">Confirm order</a>
-                                    <div class="text-right">Total: {{ number_format($shoppingCart->total, 2, ',', ' ') }} EUR</div>
+                                    <div class="text-right">Total: {{ number_format($shoppingCart->getTotalPrice(), 2, ',', ' ') }} EUR</div>
                                 </div>
                             </div>
                         </div>
