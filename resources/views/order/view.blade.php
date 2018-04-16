@@ -8,31 +8,23 @@
                     <div class="card-header">Order</div>
                     <div class="card-body">
                         <div class="list-group">
-                            @foreach ($shoppingCart->products as $product)
+                            @foreach ($order->products as $product)
                                 <div class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1"><a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->title)]) }}">{{ $product->title }}</a></h5>
-                                        <div>{{ number_format($product->price * $product->amount, 2, ',', ' ') }} EUR</div>
+                                        <div>{{ number_format($product->price * $product->pivot->amount, 2, ',', ' ') }} EUR</div>
                                     </div>
-                                    <div>Amount: {{ $product->amount }}</div>
+                                    <div>Amount: {{ $product->pivot->amount }}</div>
                                 </div>
                             @endforeach
                         </div>
                         <div class="list-group" style="margin-top: 10px">
                             <div class="list-group-item">
                                 <h6>Dellivery information:</h6>
-                                <div>{{ $client->firstName }} {{ $client->lastName }}</div>
-                                <div>{{ $client->street }} {{ $client->houseNumber }}</div>
-                                <div>{{ $client->zipCode }} {{ $client->town }}</div>
-                                <div>{{ $client->country }}</div>
-                            </div>
-                        </div>
-                        <div class="list-group" style="margin-top: 10px">
-                            <div class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <a href="#" class="btn btn-primary" role="button">Confirm order</a>
-                                    <div class="text-right">Total: {{ number_format($shoppingCart->total, 2, ',', ' ') }} EUR</div>
-                                </div>
+                                <div>{{ $order->client->firstName }} {{ $order->client->lastName }}</div>
+                                <div>{{ $order->client->street }} {{ $order->client->houseNumber }}</div>
+                                <div>{{ $order->client->zipCode }} {{ $order->client->town }}</div>
+                                <div>{{ $order->client->country }}</div>
                             </div>
                         </div>
                     </div>

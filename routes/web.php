@@ -34,6 +34,8 @@ Route::put('/shoppingcart/update/{productId}', function (int $productId)
 
 //Routes for order
 Route::get('/shoppingcart/order/confirm', 'OrderController@confirmOrder')->name('orderConfirm');
+Route::get('/shoppingcart/order/place', 'OrderController@placeOrder')->name('placeConfirm');
+Route::get('/orders/{orderId}', 'OrderController@viewOrder')->name('viewOrder');
 
 //Routes for products
 Route::get('/product', 'ProductController@index')->name('productIndex');
