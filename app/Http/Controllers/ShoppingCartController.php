@@ -10,8 +10,8 @@ class ShoppingCartController extends Controller
     public function index(Request $request)
     {
         // Check if there is a shopping cart in the session
-        if ($request->session()->has('shoppingCartItems')) {
-            $shoppingCart = $request->session()->get('shoppingCartItems');
+        if ($request->session()->has('shoppingCart')) {
+            $shoppingCart = $request->session()->get('shoppingCart');
         } else { // There is no shopping cart in the session
             $shoppingCart = (object) [];
             $shoppingCart->products = [];
@@ -31,8 +31,8 @@ class ShoppingCartController extends Controller
     public function update(Request $request, int $productId, int $amount = null)
     {
         // Check if there is a shopping cart array in the session
-        if ($request->session()->has('shoppingCartItems')) {
-            $shoppingCart = $request->session()->get('shoppingCartItems');
+        if ($request->session()->has('shoppingCart')) {
+            $shoppingCart = $request->session()->get('shoppingCart');
         } else { // There is no shopping cart array in the session
             $shoppingCart = (object) [];
             $shoppingCart->products = [];
@@ -64,7 +64,7 @@ class ShoppingCartController extends Controller
         }
 
         // Save shopping cart to the session, and redirect.
-        $request->session()->put('shoppingCartItems', $shoppingCart);
+        $request->session()->put('shoppingCart', $shoppingCart);
         return redirect()->route('shoppingCartIndex');
     }
 
