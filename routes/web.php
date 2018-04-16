@@ -32,6 +32,9 @@ Route::put('/shoppingcart/update/{productId}', function (int $productId)
     return redirect()->route('shoppingCartUpdate', ['productId' => $productId, 'amount' => $amount]);
 })->name('shoppingCartUpdatePut');
 
+//Routes for order
+Route::get('/shoppingcart/order/confirm', 'OrderController@confirmOrder')->name('orderConfirm');
+
 //Routes for products
 Route::get('/product', 'ProductController@index')->name('productIndex');
 Route::get('/product/{id}/{slug?}', 'ProductController@view')->name('productView');

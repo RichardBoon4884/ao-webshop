@@ -39,7 +39,7 @@
                             <div class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     @if(count($shoppingCart->products) != 0)
-                                        <a href="#" class="btn btn-primary" role="button">Order</a>
+                                        <a href="{{ route('orderConfirm') }}" class="btn btn-primary" role="button">Order</a>
                                     @else
                                         <a href="#" class="btn btn-outline-primary disabled" role="button">Order</a>
                                     @endif
