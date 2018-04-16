@@ -50,7 +50,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        $request->session()->put('shoppingCart', null);
+        $shoppingCart->emptyShoppingCart();
 
         return redirect()->route('viewOrder', ['orderId' => $order->id]);
     }
