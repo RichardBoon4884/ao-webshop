@@ -13,7 +13,9 @@ class ShoppingCartController extends Controller
         if ($request->session()->has('shoppingCartItems')) {
             $shoppingCart = $request->session()->get('shoppingCartItems');
         } else { // There is no shopping cart in the session
-            $shoppingCart = [];
+            $shoppingCart = (object) [];
+            $shoppingCart->products = [];
+            $shoppingCart->total = 0;
         }
 
         return view('shopping_cart.index', ['shoppingCart' => $shoppingCart]);
@@ -32,26 +34,32 @@ class ShoppingCartController extends Controller
         if ($request->session()->has('shoppingCartItems')) {
             $shoppingCart = $request->session()->get('shoppingCartItems');
         } else { // There is no shopping cart array in the session
-            $shoppingCart = [];
+            $shoppingCart = (object) [];
+            $shoppingCart->products = [];
         }
+        $shoppingCart->total = 0;
 
         // Check if product is in the shopping cart
-        if (($key = $this->searchShoppingCart($shoppingCart, $productId)) !== null) {
+        if (($key = $this->searchShoppingCart($shoppingCart->products, $productId)) !== null) {
             // Check if there is a amount given and set it, otherwise increase amount by one
-            isset($amount) ? $shoppingCart[$key]->amount = $amount : $shoppingCart[$key]->amount++;
+            isset($amount) ? $shoppingCart->products[$key]->amount = $amount : $shoppingCart->products[$key]->amount++;
         } else { // Product is not in shopping cart, add it
             $product = Product::find($productId);
             // Check if there is a amount given and set it, otherwise set to 1
             isset($amount) ? $product->amount = $amount : $product->amount = 1;
 
-            array_push($shoppingCart, $product);
-            end($shoppingCart);
-            $key = key($shoppingCart);
+            array_push($shoppingCart->products, $product);
+            end($shoppingCart->products);
+            $key = key($shoppingCart->products);
         }
 
         // Check if product amount is 0, then unset it
-        if ($shoppingCart[$key]->amount === 0) {
-            unset($shoppingCart[$key]);
+        if ($shoppingCart->products[$key]->amount === 0) {
+            unset($shoppingCart->products[$key]);
+        }
+
+        foreach ($shoppingCart->products as $product) {
+            $shoppingCart->total = $shoppingCart->total + $product->price * $product->amount;
         }
 
         // Save shopping cart to the session, and redirect.
