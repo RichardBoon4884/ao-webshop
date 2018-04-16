@@ -11,7 +11,7 @@
                             @foreach ($shoppingCart as $product)
                                 <div class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1"><a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->name)]) }}">{{ $product->name }}</a></h5>
+                                        <h5 class="mb-1"><a href="{{ route('productView', ['id' => $product->id, 'slug' => urlencode($product->title)]) }}">{{ $product->title }}</a></h5>
                                     </div>
                                     <div>
                                         {{ Form::open(['method' => 'put', 'route' => ['shoppingCartUpdate', $product->id], 'class' => 'form-inline']) }}

@@ -13,7 +13,7 @@ class Product extends Model
      */
     protected $table = 'products';
 
-    protected $fillable = array('name', 'barCode');
+    protected $fillable = array('title', 'barCode', 'price');
 
     public function categories()
     {

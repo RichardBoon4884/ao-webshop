@@ -13,28 +13,34 @@ class ProductsAndCategorieSeeder extends Seeder
     {
         DB::table('products')->insert([
             [
-                'name' => 'Herpa Wings: McDonnell Douglas MD-11 KLM (1:500)',
+                'title' => 'Herpa Wings: McDonnell Douglas MD-11 KLM (1:500)',
                 'barCode' => '524896',
+                'price' => 33.16,
             ],
             [
-                'name' => 'Herpa Wings: Boeing 747-400 KLM Orlando (1:500)',
+                'title' => 'Herpa Wings: Boeing 747-400 KLM Orlando (1:500)',
                 'barCode' => '517805-002',
+                'price' => 23.78,
             ],
             [
-                'name' => 'Herpa Wings: Boeing 777-300ER KLM "Orange Pride" (1:500)',
+                'title' => 'Herpa Wings: Boeing 777-300ER KLM "Orange Pride" (1:500)',
                 'barCode' => '529754',
+                'price' => 38.95,
             ],
             [
-                'name' => 'Boek 1 – Farewell MD-11',
+                'title' => 'Boek 1 – Farewell MD-11',
                 'barCode' => 'MD11BOEK',
+                'price' => 25.00,
             ],
             [
-                'name' => 'Boek 2 – MD-11 “End of Flightplan”',
+                'title' => 'Boek 2 – MD-11 “End of Flightplan”',
                 'barCode' => 'MD11-EOFP',
+                'price' => 25.00,
             ],
             [
-                'name' => 'Ticket to Malta',
+                'title' => 'Ticket to Malta',
                 'barCode' => 'MLA',
+                'price' => 99.99,
             ]
         ]);
         DB::table('categories')->insert([
