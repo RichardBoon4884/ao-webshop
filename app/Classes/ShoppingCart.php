@@ -73,6 +73,7 @@ class ShoppingCart
     public function emptyShoppingCart()
     {
         $this->products = [];
+        $this->saveToSession();
     }
 
     private function searchShoppingCart(array $shoppingCart, int $productId)
