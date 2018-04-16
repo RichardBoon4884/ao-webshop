@@ -16,6 +16,15 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(Request $request)
+    {
+        $client = Clients::where('user_id', Auth::user()->id)->first();
+        $orders = Orders::where('client_id', $client->id)->get();
+
+        // Render the web page
+        return view('order.index', ['orders' => $orders]);
+    }
+
     public function confirmOrder(Request $request)
     {
         $shoppingCart = new ShoppingCart($request);
@@ -39,6 +48,8 @@ class OrderController extends Controller
 
         $user = Auth::user();
         $client = Clients::where('user_id', $user->id)->first();
+
+        $order->totalPrice = $shoppingCart->getTotalPrice();
 
         $order->client()->associate($client);
 

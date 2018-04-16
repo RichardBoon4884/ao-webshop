@@ -8,7 +8,7 @@ class Orders extends Model
 {
     protected $table = 'orders';
 
-    protected $fillable = array('notes');
+    protected $fillable = array('notes', 'totalPrice');
 
     public function client()
     {

@@ -27,6 +27,14 @@
                                 <div>{{ $order->client->country }}</div>
                             </div>
                         </div>
+                        <div class="list-group" style="margin-top: 10px">
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <div></div>
+                                    <div class="text-right">Total: {{ number_format($order->totalPrice, 2, ',', ' ') }} EUR</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
